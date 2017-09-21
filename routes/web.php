@@ -12,16 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/landing', function () {
     return view('landing');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/privacy', 'LegalController@showPrivacy')->name('terms');
+Route::get('/terms', 'LegalController@showTerms')->name('privacy');
 
 
 Route::group(['prefix' => 'admin'], function () {

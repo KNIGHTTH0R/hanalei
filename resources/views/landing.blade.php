@@ -23,7 +23,19 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        @if (Auth::guest())
+          <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'Laravel') }}
+          </a>
+        @else
+          <a class="navbar-brand" href="{{ route('home') }}">
+            {{ config('app.name', 'Laravel') }}
+          </a>
+        @endif
+
+
+
+
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -39,6 +51,20 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
+            @if (Route::has('login'))
+              @auth
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                </li>
+              @else
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
+              @endauth
+            @endif
           </ul>
         </div>
       </div>
