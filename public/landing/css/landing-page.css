@@ -554,6 +554,7 @@ a:focus, a:active {
   color: #9a9a9a;
   display: block;
   margin-bottom: 3px;
+  cursor: pointer;
 }
 .footer nav > ul a:not(.btn):hover, .footer nav > ul a:not(.btn):focus {
   color: #777777;
@@ -854,7 +855,7 @@ a:focus, a:active {
     height: 50px;
 }
 .logo-container{
-    margin-top: 10px;
+
 }
 .logo-container .logo img{
     width: 100%;

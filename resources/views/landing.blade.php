@@ -28,38 +28,35 @@
                     <span class="icon-bar bar2"></span>
                     <span class="icon-bar bar3"></span>
                     </button>
-                    <a href="http://www.creative-tim.com">
-                        <div class="logo-container">
-                            <div class="logo">
-                              <img src="{{ asset('landing/img/new_logo.png') }}" alt="Creative Tim Logo">
-                            </div>
-                            <div class="brand">
-                                Creative Tim
-                            </div>
-                        </div>
-                    </a>
+                    <div class="logo-container">
+                        @if (Auth::guest())
+                            <a class="navbar-brand" href="{{ url('/') }}">
+                                {{ config('app.name', 'Laravel') }}
+                            </a>
+                        @else
+                            <a class="navbar-brand" href="{{ route('home') }}">
+                                {{ config('app.name', 'Laravel') }}
+                            </a>
+                        @endif
+                    </div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="example" >
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#">
-                            <i class="fa fa-facebook-square"></i>
-                            Like
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <i class="fa fa-twitter"></i>
-                            Tweet
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <i class="fa fa-pinterest"></i>
-                            Pin
-                            </a>
-                        </li>
+                        @if (Route::has('login'))
+                            @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+                            @endauth
+                        @endif
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -261,40 +258,18 @@
                     <nav class="pull-left">
                         <ul>
                             <li>
-                                <a href="#">
-                                Home
-                                </a>
+                                <a href="#">Home</a>
                             </li>
                             <li>
-                                <a href="#">
-                                Company
-                                </a>
+                                <a href="{{ route('terms') }}">Terms</a>
                             </li>
                             <li>
-                                <a href="#">
-                                Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                Blog
-                                </a>
+                                <a href="{{ route('privacy') }}">Privacy</a>
                             </li>
                         </ul>
                     </nav>
-                    <div class="social-area pull-right">
-                        <a class="btn btn-social btn-facebook btn-simple">
-                        <i class="fa fa-facebook-square"></i>
-                        </a>
-                        <a class="btn btn-social btn-twitter btn-simple">
-                        <i class="fa fa-twitter"></i>
-                        </a>
-                        <a class="btn btn-social btn-pinterest btn-simple">
-                        <i class="fa fa-pinterest"></i>
-                        </a>
-                    </div>
-                    <div class="copyright">
-                        &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love
+                    <div class="copyright pull-right">
+                        &copy; {{ date('Y') }}
                     </div>
                 </div>
             </footer>
