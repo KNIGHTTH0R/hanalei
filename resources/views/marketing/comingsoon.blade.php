@@ -75,15 +75,34 @@
             <h4 class="motto">Find the best Bootstrap 3 freebies and themes on the web.</h4>
             <div class="subscribe">
                 <h5 class="info-text">
-                    Join the waiting list for the beta. We keep you posted.
+                    Join the waiting list for the beta. We'll keep you posted.
                 </h5>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 col-sm6-6 col-sm-offset-3 ">
-                        <form class="form-inline" role="form">
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <form class="form-inline" role="form" action="{{ route('marketing.prospect.create') }}" method="POST">
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                <input type="email" class="form-control transparent" placeholder="Your email here...">
+                                <input type="email" name="email" class="form-control transparent" placeholder="Email Address">
                             </div>
+
+                            @if (isset($_GET['utm_source']))
+                                <input type="hidden" name="utm_source" value="{{ $_GET['utm_source'] }}">
+                            @endif
+
+                            @if (isset($_GET['utm_campaign']))
+                                <input type="hidden" name="utm_campaign" value="{{ $_GET['utm_campaign'] }}">
+                            @endif
+
+                            @if (isset($_SERVER['HTTP_REFERER']))
+                                <input type="hidden" name="referrer" value="{{ $_SERVER['HTTP_REFERER'] }}">
+                            @endif
+
                             <button type="submit" class="btn btn-primary btn-fill">Notify Me</button>
                         </form>
 

@@ -11,13 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('comingsoon');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'MarketingController@index')->name('marketing.homepage');
+Route::get('/mailinglist', 'MarketingController@show')->name('marketing.prospect.show');
+Route::post('/mailinglist', 'MarketingController@create')->name('marketing.prospect.create');
+
 Route::get('/privacy', 'LegalController@showPrivacy')->name('terms');
 Route::get('/terms', 'LegalController@showTerms')->name('privacy');
 
